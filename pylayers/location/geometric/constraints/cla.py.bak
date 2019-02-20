@@ -183,7 +183,7 @@ class CLA(object):
             if c.type != 'TDOA':
                 s = s + '\n' + '{0:4} | {1:6} |{2:4} | {3:4} | {4:15}| {5:9}| {6:5}| {7:7}| {8:6}|'.format(node,peer,c.type,wstd, c.p, c.value, c.std, c.runable, c.usable)
             else:
-                s = s + '\n' + '{0:4} | {1:6} |{2:4} | {3:4} | {4:15}| {5:9}| {6:5}| {7:7}| {8:6}|'.format(node,peer,c.type,wstd, str(c.p[0]), str(c.value), str(c.std), c.runable, c.usable)
+                s = s + '\n' + '{0:4} | {1:6} |{2:4} | {3:4} | {4:15}| {5:9}| {6:5}| {7:7}| {8:6}|'.format(node,peer,c.type,wstd, c.p[0], c.value, c.std, c.runable, c.usable)
                 s = s + '\n' + '                            '+str(c.p[1])
                 # s = s + '\n' + '{0:4} | {1:15}| {2:9}| {3:5}| {4:7}| {5:6}| {6:8}| {7:9}'.format(c.type, c.p[0], c.value, c.std, c.runable, c.usable , c.obsolete , c.evaluated)
                 # s = s + '\n' + '       '+str(c.p[1])
@@ -567,7 +567,7 @@ class CLA(object):
                 sTAB = (sTAB * TAB)
 
         if self.ndim == 3:
-            B = (sDDB[0] * sDDB[1]).reshape(int(len(lv) / 8), 8)
+            B = (sDDB[0] * sDDB[1]).reshape(len(lv) / 8, 8)
             sB = np.sum(B, axis=1)
             EB = np.nonzero((sB) > 7)[0]
             AB = np.nonzero((sB > 0) & (sB < 8))[0]
@@ -576,7 +576,7 @@ class CLA(object):
             AB = np.unique(np.hstack((AB, ABt)))
             return (EB, AB)
         if self.ndim == 2:
-            B = (sDDB[0] * sDDB[1]).reshape(int(len(lv) / 4), 4)
+            B = (sDDB[0] * sDDB[1]).reshape(len(lv) / 4, 4)
             sB = np.sum(B, axis=1)
             EB = np.nonzero((sB) > 3)[0]
             AB = np.nonzero((sB > 0) & (sB < 4))[0]
@@ -778,7 +778,7 @@ class CLA(object):
 
         if par['boxes']:
 
-            for l in list(self.dlayer.keys()):
+            for l in self.dlayer.keys():
                 self.dlayer[l][0].parmsh['display'] = False
                 self.dlayer[l][1].parmsh['display'] = False
 
@@ -894,7 +894,7 @@ class CLA(object):
 
         if par['boxes']:
 
-            for l in list(self.dlayer.keys()):
+            for l in self.dlayer.keys():
                 self.dlayer[l][0].parmsh['display'] = False
                 self.dlayer[l][1].parmsh['display'] = False
 
@@ -1236,7 +1236,7 @@ class CLA(object):
         """
 
         if l == -1:
-            l = np.max(list(self.dlayer.keys()))
+            l = np.max(self.dlayer.keys())
 
         PP = []
         self.saveP = []
@@ -1289,7 +1289,7 @@ class CLA(object):
         """
 
         if l == -1:
-            l = np.max(list(self.dlayer.keys()))
+            l = np.max(self.dlayer.keys())
 
         PP = []
         poids = []
@@ -1354,24 +1354,25 @@ class CLA(object):
             for i in range(len(axis)):
                 if axis[i] != 0:
                     try:
-                        count = np.vstack((count, np.repeat(list(range(2 * (p - 1), (2 * (p - 1)) + 2)) * (pow(2, saxis - p)), p)))
+                        count = np.vstack((count, np.repeat(range(2 * (p - 1), (2 * (p - 1)) + 2) * (pow(2, saxis - p)), p)))
                     except:
-                        count = np.repeat(list(range(2 * (p - 1), (2 * (p - 1)) + 2))
+                        count = np.repeat(range(2 * (p - 1), (2 * (p - 1)) + 2)
                                           * (pow(2, saxis - p)), p)
                     p = p + 1
             count = count.T
             lpc=[]
             for i in range(len(clust)):
                 if len(clust) < 3:
-                    clusters = np.array(clust[i],dtype=int)
+                    clusters = clust[i]
                 else:
 
                     if len(np.shape(count)) > 1:
-                        clusters = np.array(np.intersect1d(clust[count[i,0]], clust[count[i, 1]]),dtype=int)
+                        clusters = np.intersect1d(clust[count[i,0]], clust[count[i, 1]])
                     else:
-                        clusters = np.array(np.intersect1d(clust[count[0]], clust[count[1]]),dtype=int)
+                        clusters = np.intersect1d(clust[count[0]], clust[count[1]])
 
-                clust_vol = np.sum(np.array(self.dlayer[l][dlindx].vol)[np.array(np.unique(clusters),dtype=int)])
+                clust_vol = np.sum(np.array(self.dlayer[l][
+                    dlindx].vol)[np.unique(clusters)])
 
                 if len(clusters) != 0:
                     mp = np.max(self.saveP[clusters])

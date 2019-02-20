@@ -311,7 +311,7 @@ class TDOA(Constraint):
                            or all distances are less than rangemin
         """
         ppb = pow(2, len(self.p[0, :]))
-        nbbox = len(v) / ppb
+        nbbox = int(len(v) / ppb)
         DDbound = np.zeros((4, len(v)), dtype='bool')
         TB = np.zeros((4, nbbox), dtype='bool')
 
