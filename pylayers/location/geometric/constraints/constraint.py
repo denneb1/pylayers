@@ -121,7 +121,7 @@ class Constraint(object):
         self.time = time.time()
         self.lbox = LBoxN([])
         self.evaluated = False
-        if p.any():
+        if np.any(p):
             self.runable = True
         else:
             self.runable = False

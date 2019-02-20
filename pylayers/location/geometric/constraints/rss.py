@@ -239,7 +239,7 @@ class RSS(Constraint):
 #               DDbound = []
         p0 = self.p
         ppb = pow(2, len(p0))
-        nbbox = len(v) / ppb
+        nbbox = int(len(v) / ppb)
 
         DDbound = np.zeros((4, len(v)), dtype='bool')
         TB = np.zeros((4, nbbox), dtype='bool')

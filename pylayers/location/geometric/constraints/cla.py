@@ -181,7 +181,7 @@ class CLA(object):
             except:
                 wstd = '---'
             if c.type != 'TDOA':
-                s = s + '\n' + '{0:4} | {1:6} |{2:4} | {3:4} | {4:15}| {5:9}| {6:5}| {7:7}| {8:6}|'.format(node,peer,c.type,wstd, c.p, c.value, c.std, c.runable, c.usable)
+                s = s + '\n' + '{0:4} | {1:6} |{2:4} | {3:4} | {4:15}| {5:9}| {6:5}| {7:7}| {8:6}|'.format(node,peer,c.type,wstd, str(c.p), str(c.value), str(c.std), c.runable, c.usable)
             else:
                 s = s + '\n' + '{0:4} | {1:6} |{2:4} | {3:4} | {4:15}| {5:9}| {6:5}| {7:7}| {8:6}|'.format(node,peer,c.type,wstd, str(c.p[0]), str(c.value), str(c.std), c.runable, c.usable)
                 s = s + '\n' + '                            '+str(c.p[1])
