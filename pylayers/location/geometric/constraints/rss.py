@@ -119,8 +119,7 @@ class RSS(Constraint):
             self.param = self.model.param
         else:
             self.model = model
-            # TODO:something not right here
-            #self.param = self.model.param
+            self.param = self.model.param
         self.update()
 
     def update(self):
