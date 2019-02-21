@@ -116,10 +116,10 @@ class RSS(Constraint):
 #                       self.model['RSSnp'] = 2.64
 #                       self.model['RSSStd'] = 4.34
 #                       self.model['Rest'] = 'mode'
-            self.param = self.model.param
+            #self.param = self.model.param
         else:
             self.model = model
-            self.param = self.model.param
+            #self.param = self.model.param
         self.update()
 
     def update(self):

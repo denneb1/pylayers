@@ -173,7 +173,7 @@ class TDOA(Constraint):
         argep = self.f ** 2 - cp ** 2
         argem = self.f ** 2 - cm ** 2
         try:
-            e = np.sqrt(arge)
+             e = np.sqrt(arge)
         except:
             pdb.set_trace()
         ep = np.sqrt(argep)
